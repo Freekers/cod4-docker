@@ -2,6 +2,8 @@
 
 *Call of Duty 4 Dedicated Server based on COD4x 1.7a in a 21MB Docker image*
 
+[![Docker Cod4](https://github.com/freekers/cod4-docker/raw/master/images/title.png)](https://github.com/Freekers/cod4-docker/tree/17a)
+
 It is based on:
 
 - [Alpine 3.9](https://alpinelinux.org)
