@@ -1,32 +1,13 @@
 # COD4 Docker dedicated server
 
-*Call of duty 4 dedicated server in a 21MB Docker image*
+*Call of Duty 4 Dedicated Server based on COD4x 1.7a in a 21MB Docker image*
 
 [![Docker Cod4](https://github.com/qdm12/cod4-docker/raw/master/images/title.png)](https://hub.docker.com/r/qmcgaw/cod4/)
 
-[![Docker Build Status](https://img.shields.io/docker/build/qmcgaw/cod4.svg)](https://hub.docker.com/r/qmcgaw/cod4)
-
-[![GitHub last commit](https://img.shields.io/github/last-commit/qdm12/cod4-docker.svg)](https://github.com/qdm12/cod4-docker/issues)
-[![GitHub commit activity](https://img.shields.io/github/commit-activity/y/qdm12/cod4-docker.svg)](https://github.com/qdm12/cod4-docker/issues)
-[![GitHub issues](https://img.shields.io/github/issues/qdm12/cod4-docker.svg)](https://github.com/qdm12/cod4-docker/issues)
-
-[![Docker Pulls](https://img.shields.io/docker/pulls/qmcgaw/cod4.svg)](https://hub.docker.com/r/qmcgaw/cod4)
-[![Docker Stars](https://img.shields.io/docker/stars/qmcgaw/cod4.svg)](https://hub.docker.com/r/qmcgaw/cod4)
-[![Docker Automated](https://img.shields.io/docker/automated/qmcgaw/cod4.svg)](https://hub.docker.com/r/qmcgaw/cod4)
-
-[![Image size](https://images.microbadger.com/badges/image/qmcgaw/cod4.svg)](https://microbadger.com/images/qmcgaw/cod4)
-[![Image version](https://images.microbadger.com/badges/version/qmcgaw/cod4.svg)](https://microbadger.com/images/qmcgaw/cod4)
-
-[![Donate PayPal](https://img.shields.io/badge/Donate-PayPal-green.svg)](https://paypal.me/qdm12)
-
-| Image size | RAM usage | CPU usage |
-| --- | --- | --- |
-| 20.9MB | 80MB to 150MB | Low |
-
-It is based on:
+Based on:
 
 - [Alpine 3.9](https://alpinelinux.org)
-- [Cod4x](https://github.com/callofduty4x/CoD4x_Server) server built from source
+- [Cod4x](https://github.com/callofduty4x/CoD4x_Server)
 
 ## Requirements
 
