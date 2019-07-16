@@ -30,8 +30,7 @@ It is based on:
 
 ## Requirements
 
-- COD4 Client game
-- COD4 running on version 1.7 have to [update to 1.8](#update-your-game)
+- COD4 Client game version 1.7
 - Original COD4 **main** and **zone** files required (from the client installation directory)
 
 ## Features
@@ -117,16 +116,11 @@ We assume your *call of duty 4 game* is installed at `/mycod4path`
 ## Update your game
 
 1. Make sure you updated your game to version 1.7 first (see [this](https://cod4x.me/index.php?/forums/topic/12-how-to-install-cod4x/))
-1. Download the [COD4x client ZIP file](https://cod4x.me/downloads/cod4x_client.zip)
-1. Using Winrar / 7Zip / Winzip, extract the **cod4x_client.zip** to your COD4 game directory
-1. Double click on **install.cmd** that you just extracted
-1. When launching the multiplayer game, you should see at the bottom right:
 
 ![Bottom right screen cod4x](https://github.com/qdm12/cod4-docker/blob/master/images/cod4x-update.png?raw=true)
 
 ## Testing
 
-1. Make sure you [updated your COD4 Game to 1.8](#update-your-game)
 1. Launch the COD4 multiplayer game
 1. Click on **Join Game**
 1. Click on **Source** at the top until it's set on *Favourites*
