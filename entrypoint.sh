@@ -69,7 +69,7 @@ if [ ! -f main/server.cfg ]; then
 fi
 exitOnError $?
 printf "COD4X arguments are: $@\n\n"
-./home/user/cod4/cod4x17a_dedrun +set fs_homepath /home/user/cod4"$@"
+./cod4x17a_dedrun +set fs_homepath /home/user/cod4"$@"
 status=$?
 printf "\n =========================================\n"
 printf " Exit with status $status\n"
