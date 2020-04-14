@@ -21,8 +21,7 @@ LABEL org.label-schema.schema-version="1.0.0-rc1" \
     cpu-usage="Low"
 EXPOSE 28960/udp
 WORKDIR /home/user/cod4
-COPY --chown=1000 vendor/cod4x17a_dedrun .
-COPY --chown=1000 entrypoint.sh server.cfg vendor/xbase17_00.iwd ./
+COPY --chown=1000 entrypoint.sh server.cfg vendor/xbase17_00.iwd vendor/cod4x17a_dedrun ./
 RUN adduser -S user -h /home/user -u 1000 && \
     chown -R user /home/user && \
     chmod -R 700 /home/user && \
