@@ -1,12 +1,12 @@
 # COD4 Docker dedicated server
 
-*Call of Duty 4 Dedicated Server based on COD4x 1.7a in a 21MB Docker image*
+*Call of Duty 4 Dedicated Server based on COD4x 1.7a as Docker image*
 
 [![Docker Cod4](https://github.com/freekers/cod4-docker/raw/master/images/title.png)](https://github.com/Freekers/cod4-docker/tree/17a)
 
 It is based on:
 
-- [Alpine 3.9](https://alpinelinux.org)
+- [Ubuntu](https://ubuntu.com)
 - [Cod4x](https://github.com/callofduty4x/CoD4x_Server)
 
 ## Requirements
@@ -16,12 +16,10 @@ It is based on:
 
 ## Features
 
-- **21MB** image
 - [Cod4x server features](https://github.com/callofduty4x/CoD4x_Server#the-most-prominent-features-are)
 - Works with custom mods and maps (see the [Mods section](#Mods))
 - Easily configurable with [docker-compose](#using-docker-compose)
 - Runs without root (safer)
-- Run a lightweight Apache HTTP server for your clients to download your mods and usermaps with docker-compose.yml
 - Default cod4 configuration file [server.cfg](https://github.com/qdm12/cod4-docker/blob/master/server.cfg)
     - Placed into `./main`
     - Launched by default when not using mods with `exec server.cfg`
@@ -41,8 +39,7 @@ We assume your *call of duty 4 game* is installed at `/mycod4path`
 
     ```bash
     chown -R 1000 main mods usermaps zone
-    chmod -R 400 zone usermaps
-    chmod -R 700 main mods
+    chmod -R 700 main mods zone usermaps
     ```
 
     You can also run the container with `--user="root"` (unadvised!)
@@ -65,40 +62,6 @@ We assume your *call of duty 4 game* is installed at `/mycod4path`
     ```bash
     docker-compose up -d
     ```
-
-### HTTP server for custom mods and maps
-
-1. Locate the relevant configuration file - for example `main/server.cfg` or `mods/mymod/server.cfg`
-1. Modify/add the following lines & change `youraddress` to your IP or domain name:
-
-    ```c
-    set sv_allowdownload "1"
-    set sv_wwwDownload "1"
-    set sv_wwwBaseURL "http://youraddress:8000" // supports http, https and ftp addresses
-    set sv_wwwDlDisconnected "0"
-    ```
-
-1. Run the following Docker command:
-
-    ```bash
-    docker run -d --name=cod4-http -p 8000:80/tcp --restart=always \
-    -v $(pwd)/mods:/usr/local/apache2/htdocs/mods:ro \
-    -v $(pwd)/usermaps:/usr/local/apache2/htdocs/usermaps:ro httpd:alpine
-    ```
-
-    You can also uncomment the HTTP section in the the [*docker-compose.yml*](https://raw.githubusercontent.com/qdm12/cod4-docker/master/docker-compose.yml) file and run
-
-    ```bash
-    docker-compose up -d
-    ```
-
-1. You will have to setup port forwarding on your router. Ask me or Google if you need help.
-
-## Update your game
-
-1. Make sure you updated your game to version 1.7 first (see [this](https://cod4x.me/index.php?/forums/topic/12-how-to-install-cod4x/))
-
-![Bottom right screen cod4x](https://github.com/qdm12/cod4-docker/blob/master/images/cod4x-update.png?raw=true)
 
 ## Testing
 
