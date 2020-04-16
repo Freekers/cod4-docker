@@ -20,7 +20,7 @@ It is based on:
 - Works with custom mods and maps (see the [Mods section](#Mods))
 - Easily configurable with [docker-compose](#using-docker-compose)
 - Runs without root (safer)
-- Default cod4 configuration file [server.cfg](https://github.com/qdm12/cod4-docker/blob/master/server.cfg)
+- Default cod4 configuration file [server.cfg](https://github.com/freekers/cod4-docker/blob/master/server.cfg)
     - Placed into `./main`
     - Launched by default when not using mods with `exec server.cfg`
     - Easily changeable
@@ -57,7 +57,7 @@ We assume your *call of duty 4 game* is installed at `/mycod4path`
 
     The command line argument `+map mp_shipment` is optional and defaults to `+set dedicated 2+set sv_cheats "1"+set sv_maxclients "64"+exec server.cfg+map_rotate`
 
-    You can also download and modify the [*docker-compose.yml*](https://raw.githubusercontent.com/qdm12/cod4-docker/master/docker-compose.yml) file and run
+    You can also download and modify the [*docker-compose.yml*](https://raw.githubusercontent.com/freekers/cod4-docker/master/docker-compose.yml) file and run
 
     ```bash
     docker-compose up -d
