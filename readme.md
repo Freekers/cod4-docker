@@ -1,29 +1,26 @@
-# COD4 Docker dedicated server
+# COD4x 1.7a Dedicated Server in Docker
 
-*Call of Duty 4 Dedicated Server based on COD4x 1.7a in a 21MB Docker image*
+*Call of Duty 4 Dedicated Server based on COD4x 1.7a as Docker image*
 
-[![Docker Cod4](https://github.com/freekers/cod4-docker/raw/master/images/title.png)](https://github.com/Freekers/cod4-docker)
+[![Docker Cod4](https://github.com/freekers/cod4-docker/raw/master/images/title.png)](https://github.com/Freekers/cod4-docker/)
 
-Based on:
+It is based on:
 
-- [Alpine 3.9](https://alpinelinux.org)
+- [Ubuntu](https://ubuntu.com)
 - [Cod4x](https://github.com/callofduty4x/CoD4x_Server)
 
 ## Requirements
 
-- COD4 Client game
-- COD4 running on version 1.7 have to [update to 1.8](#update-your-game)
+- COD4 Client game version 1.7
 - Original COD4 **main** and **zone** files required (from the client installation directory)
 
 ## Features
 
-- **21MB** image
 - [Cod4x server features](https://github.com/callofduty4x/CoD4x_Server#the-most-prominent-features-are)
 - Works with custom mods and maps (see the [Mods section](#Mods))
 - Easily configurable with [docker-compose](#using-docker-compose)
 - Runs without root (safer)
-- Run a lightweight Apache HTTP server for your clients to download your mods and usermaps with docker-compose.yml
-- Default cod4 configuration file [server.cfg](https://github.com/qdm12/cod4-docker/blob/master/server.cfg)
+- Default cod4 configuration file [server.cfg](https://github.com/freekers/cod4-docker/blob/master/server.cfg)
     - Placed into `./main`
     - Launched by default when not using mods with `exec server.cfg`
     - Easily changeable
@@ -42,8 +39,7 @@ We assume your *call of duty 4 game* is installed at `/mycod4path`
 
     ```bash
     chown -R 1000 main mods usermaps zone
-    chmod -R 400 zone usermaps
-    chmod -R 700 main mods
+    chmod -R 700 main mods zone usermaps
     ```
 
     You can also run the container with `--user="root"` (unadvised!)
@@ -61,53 +57,14 @@ We assume your *call of duty 4 game* is installed at `/mycod4path`
 
     The command line argument `+map mp_shipment` is optional and defaults to `+set dedicated 2+set sv_cheats "1"+set sv_maxclients "64"+exec server.cfg+map_rotate`
 
-    You can also download and modify the [*docker-compose.yml*](https://raw.githubusercontent.com/qdm12/cod4-docker/master/docker-compose.yml) file and run
+    You can also download and modify the [*docker-compose.yml*](https://raw.githubusercontent.com/freekers/cod4-docker/master/docker-compose.yml) file and run
 
     ```bash
     docker-compose up -d
     ```
-
-### HTTP server for custom mods and maps
-
-1. Locate the relevant configuration file - for example `main/server.cfg` or `mods/mymod/server.cfg`
-1. Modify/add the following lines & change `youraddress` to your IP or domain name:
-
-    ```c
-    set sv_allowdownload "1"
-    set sv_wwwDownload "1"
-    set sv_wwwBaseURL "http://youraddress:8000" // supports http, https and ftp addresses
-    set sv_wwwDlDisconnected "0"
-    ```
-
-1. Run the following Docker command:
-
-    ```bash
-    docker run -d --name=cod4-http -p 8000:80/tcp --restart=always \
-    -v $(pwd)/mods:/usr/local/apache2/htdocs/mods:ro \
-    -v $(pwd)/usermaps:/usr/local/apache2/htdocs/usermaps:ro httpd:alpine
-    ```
-
-    You can also uncomment the HTTP section in the the [*docker-compose.yml*](https://raw.githubusercontent.com/qdm12/cod4-docker/master/docker-compose.yml) file and run
-
-    ```bash
-    docker-compose up -d
-    ```
-
-1. You will have to setup port forwarding on your router. Ask me or Google if you need help.
-
-## Update your game
-
-1. Make sure you updated your game to version 1.7 first (see [this](https://cod4x.me/index.php?/forums/topic/12-how-to-install-cod4x/))
-1. Download the [COD4x client ZIP file](https://cod4x.me/downloads/cod4x_client.zip)
-1. Using Winrar / 7Zip / Winzip, extract the **cod4x_client.zip** to your COD4 game directory
-1. Double click on **install.cmd** that you just extracted
-1. When launching the multiplayer game, you should see at the bottom right:
-
-![Bottom right screen cod4x](https://github.com/qdm12/cod4-docker/blob/master/images/cod4x-update.png?raw=true)
 
 ## Testing
 
-1. Make sure you [updated your COD4 Game to 1.8](#update-your-game)
 1. Launch the COD4 multiplayer game
 1. Click on **Join Game**
 1. Click on **Source** at the top until it's set on *Favourites*
@@ -116,7 +73,7 @@ We assume your *call of duty 4 game* is installed at `/mycod4path`
     - Add the port if you run it on something else than port UDP 28960 (i.e. `192.168.1.26:28961`)
 1. Click on **Refresh** and try to connect to the server in the list
 
-![COD4 screenshot](https://github.com/qdm12/cod4-docker/blob/master/images/test.png?raw=true)
+![COD4 screenshot](https://github.com/Freekers/cod4-docker/blob/master/images/test.png?raw=true)
 
 ## Mods
 
@@ -138,19 +95,19 @@ and must be in the `ARGS` environment variable:
 - `+exec server.cfg` if using a configuration file
 - `+set fs_game mods/mymod` if using a custom mod
 - `+set com_hunkMegs "512"` don't use if not needed
-- `+set net_ip 127.0.0.1` don't use if not needed
-- `+set net_port 28961` don't use if not needed
+- `+set net_ip 127.0.0.1` don't use if not needed, requires `host` network mode
+- `+set net_port 28961` don't use if not needed, requires `host` network mode
 - `+map_rotate` OR i.e. `+map mp_shipment` **should be the last launch argument**
 
-## TODOs
+## Masterlist
 
-- Env variables for plugins etc.
-- Replace Apache with Nginx
-- Plugins (see https://hub.docker.com/r/callofduty4x/cod4x18-server/)
-- Easily switch between mods: script file or management tool
-- Built-in mods?
+In order for the server to show up on the Activision Masterlist, you need to use `host` network mode for the container so that it can bind to the WAN/Internet IP address of your server. Additionally, you need to set `+set net_ip 123.123.123.123 +set net_port 28961` as `ARGS` environment variable.
+
+If using `bridge` network mode, the container will bind to the IP address of the Docker network and therefore won't show up on the Activision Masterlist, as the heartbeat will send a ['local' IP-address](https://docs.docker.com/network/network-tutorial-standalone/) to the Masterserver (e.g. 172.16.X.X.).
+
+**Note**: This version of COD4x (1.7a) is no longer compatible with the [COD4**x** Masterserver](http://cod4master.cod4x.me/) as [it now requires a token to be listed](https://cod4x.me/index.php?/forums/topic/2814-new-requirement-for-cod4-x-servers-to-get-listed-on-masterserver/), which has not been implemented/backported to COD4x version 1.7a.
 
 ## Acknowledgements
 
 - Credits to the developers of Cod4x server
-- The help I had on [Cod4x.me forums](https://cod4x.me/index.php?/forums/)
+- Forked from [qdm12/cod4-docker](https://github.com/qdm12/cod4-docker)

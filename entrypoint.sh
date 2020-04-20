@@ -60,8 +60,8 @@ if [ $? != 0 ]; then
 fi
 # TODO More checks
 # No sym links as they don't work on remote shares in example
-if [ ! -f main/xbase_00.iwd ]; then
-  cp xbase_00.iwd main/xbase_00.iwd
+if [ ! -f main/xbase17_00.iwd ]; then
+  cp xbase17_00.iwd main/xbase17_00.iwd
 fi
 exitOnError $?
 if [ ! -f main/server.cfg ]; then
@@ -69,7 +69,7 @@ if [ ! -f main/server.cfg ]; then
 fi
 exitOnError $?
 printf "COD4X arguments are: $@\n\n"
-./cod4x18_dedrun +set fs_homepath /home/user/cod4"$@"
+./cod4x17a_dedrun +set fs_homepath /home/user/cod4"$@"
 status=$?
 printf "\n =========================================\n"
 printf " Exit with status $status\n"

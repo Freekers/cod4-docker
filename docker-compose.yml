@@ -1,27 +1,15 @@
 version: '3'
 services:
   cod4:
-    image: qmcgaw/cod4
+    image: freekers/docker-cod4x17a:latest
     container_name: cod4
     volumes:
       - /yourpath/main:/home/user/cod4/main
       - /yourpath/zone:/home/user/cod4/zone:ro
       - /yourpath/mods:/home/user/cod4/mods
       - /yourpath/usermaps:/home/user/cod4/usermaps:ro
-      - /yourpath/logs:/home/user/.callofduty4
     network_mode: bridge
     ports:
       - 28960:28960/udp
-    command: +set dedicated 2+set sv_cheats 1+set sv_maxclients 64+set ui_maxclients 64+exec server.cfg+map_rotate
+    command: +set dedicated 2+set sv_cheats 0+set sv_maxclients 64+set ui_maxclients 64+exec server.cfg+map_rotate
     restart: always
-  # =>>> http server to server mods and usermaps
-  #http:
-  #  image: httpd:alpine
-  #  container_name: cod4-http
-  #  volumes:
-  #    - ./mods:/usr/local/apache2/htdocs/mods:ro
-  #    - ./usermaps:/usr/local/apache2/htdocs/usermaps:ro
-  #  ports:
-  #    - 8000:80
-  #  network_mode: bridge
-  #  restart: always
