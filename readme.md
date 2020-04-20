@@ -1,4 +1,4 @@
-# COD4 Docker dedicated server
+# COD4x 1.7a Dedicated Server in Docker
 
 *Call of Duty 4 Dedicated Server based on COD4x 1.7a as Docker image*
 
@@ -73,7 +73,7 @@ We assume your *call of duty 4 game* is installed at `/mycod4path`
     - Add the port if you run it on something else than port UDP 28960 (i.e. `192.168.1.26:28961`)
 1. Click on **Refresh** and try to connect to the server in the list
 
-![COD4 screenshot](https://github.com/qdm12/cod4-docker/blob/master/images/test.png?raw=true)
+![COD4 screenshot](https://github.com/Freekers/cod4-docker/blob/master/images/test.png?raw=true)
 
 ## Mods
 
@@ -95,9 +95,17 @@ and must be in the `ARGS` environment variable:
 - `+exec server.cfg` if using a configuration file
 - `+set fs_game mods/mymod` if using a custom mod
 - `+set com_hunkMegs "512"` don't use if not needed
-- `+set net_ip 127.0.0.1` don't use if not needed
-- `+set net_port 28961` don't use if not needed
+- `+set net_ip 127.0.0.1` don't use if not needed, requires `host` network mode
+- `+set net_port 28961` don't use if not needed, requires `host` network mode
 - `+map_rotate` OR i.e. `+map mp_shipment` **should be the last launch argument**
+
+## Masterlist
+
+In order for the server to show up on the Activision Masterlist, you need to use `host` network mode for the container so that it can bind to the WAN/Internet IP address of your server. Additionally, you need to set `+set net_ip 123.123.123.123 +set net_port 28961` as `ARGS` environment variable.
+
+If using `bridge` network mode, the container will bind to the IP address of the Docker network and therefore won't show up on the Activision Masterlist, as the heartbeat will send a ['local' IP-address](https://docs.docker.com/network/network-tutorial-standalone/) to the Masterserver (e.g. 172.16.X.X.).
+
+**Note**: This version of COD4x (1.7a) is no longer compatible with the [COD4**x** Masterserver](http://cod4master.cod4x.me/) as [it now requires a token to be listed](https://cod4x.me/index.php?/forums/topic/2814-new-requirement-for-cod4-x-servers-to-get-listed-on-masterserver/), which has not been implemented/backported to COD4x version 1.7a.
 
 ## Acknowledgements
 
