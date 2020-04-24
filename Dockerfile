@@ -1,4 +1,4 @@
-FROM ubuntu:bionic
+FROM ubuntu:focal
 EXPOSE 28960/udp
 EXPOSE 28960/tcp
 WORKDIR /home/user/cod4
