@@ -47,12 +47,13 @@ We assume your *call of duty 4 game* is installed at `/mycod4path`
 1. Run the following command as root user on your host:
 
     ```bash
-    docker run -d --name=cod4 -p 28960:28960/udp \
+    docker run -d --name=cod4 -p 28960:28960/udp -p 28960:28960/tcp \
         -v $(pwd)/main:/home/user/cod4/main \
         -v $(pwd)/zone:/home/user/cod4/zone:ro \
         -v $(pwd)/mods:/home/user/cod4/mods \
         -v $(pwd)/usermaps:/home/user/cod4/usermaps:ro \
-        qmcgaw/cod4 +map mp_shipment
+        -e CHECK_PORT=28960 \
+        freekers/cod4 +map mp_shipment
     ```
 
     The command line argument `+map mp_shipment` is optional and defaults to `+set dedicated 2+set sv_cheats "1"+set sv_maxclients "64"+exec server.cfg+map_rotate`
@@ -62,6 +63,29 @@ We assume your *call of duty 4 game* is installed at `/mycod4path`
     ```bash
     docker-compose up -d
     ```
+    
+## Healthcheck and Server Restarts
+
+There are two types of restarts:
+
+1. If the container would stop for some reason (e.g. ShutdownGame) - Docker will restart it automatically ('restart' part in docker-compose.yml)
+
+1. If for some reason the container would still run, but the `healthcheck` fails (e.g. the CoD4 server process is fronzen), the Docker container will be marked as 'unhealthy'. However, in this case, the container wouldn't be restarted automatically by Docker. For this you need an additional Docker image called `autoheal`. Here's a docker-compose.yml example for autoheal:
+```
+    version: '3.7'
+      services:
+        autoheal:
+          image: willfarrell/autoheal
+          container_name: autoheal
+          restart: always
+          volumes:
+           - /var/run/docker.sock:/var/run/docker.sock
+          environment:
+           AUTOHEAL_CONTAINER_LABEL: "all"
+```
+AUTOHEAL_CONTAINER_LABEL with value "all" means that all unhealthy containers would be restarted.
+
+If you change the default server port, i.e. 28960, then make sure the `CHECK_PORT` in your Docker run command or docker-compose matches your `net_port`.
 
 ## Testing
 

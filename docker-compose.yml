@@ -3,6 +3,7 @@ services:
   cod4:
     image: freekers/docker-cod4x17a:latest
     container_name: cod4
+    restart: always
     volumes:
       - /yourpath/main:/home/user/cod4/main
       - /yourpath/zone:/home/user/cod4/zone:ro
@@ -11,5 +12,7 @@ services:
     network_mode: bridge
     ports:
       - 28960:28960/udp
+      - 28960:28960/tcp
     command: +set dedicated 2+set sv_cheats 0+set sv_maxclients 64+set ui_maxclients 64+exec server.cfg+map_rotate
-    restart: always
+    environment:
+     CHECK_PORT: 28960
