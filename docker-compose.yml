@@ -16,3 +16,4 @@ services:
     command: +set dedicated 2+set sv_cheats 0+set sv_maxclients 64+set ui_maxclients 64+exec server.cfg+map_rotate
     environment:
      CHECK_PORT: 28960
+     CHECK_IP: 127.0.0.1
