@@ -87,6 +87,8 @@ AUTOHEAL_CONTAINER_LABEL with value "all" means that all unhealthy containers wo
 
 If you change the default server port, i.e. 28960, then make sure the `CHECK_PORT` in your Docker run command or docker-compose matches your `net_port`.
 
+If you change `net_ip`, then make sure the `CHECK_IP` in your Docker run command or docker-compose matches your `net_ip`.
+
 ## Testing
 
 1. Launch the COD4 multiplayer game
