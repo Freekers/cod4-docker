@@ -53,6 +53,7 @@ We assume your *call of duty 4 game* is installed at `/mycod4path`
         -v $(pwd)/mods:/home/user/cod4/mods \
         -v $(pwd)/usermaps:/home/user/cod4/usermaps:ro \
         -e CHECK_PORT=28960 \
+        -e CHECK_IP=127.0.0.1 \
         freekers/cod4 +map mp_shipment
     ```
 
