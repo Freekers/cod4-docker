@@ -21,7 +21,7 @@ RUN apt-get update && \
     rm -rf /var/lib/apt/lists/*
     
 # check server info every 5 seconds
-HEALTHCHECK --interval=5s --timeout=3s --retries=3 CMD if [ -z "$(echo -e '\xff\xff\xff\xffgetinfo' | nc -w 1 -u 127.0.0.1 ${CHECK_PORT})" ]; then exit 1; else exit 0; fi
+HEALTHCHECK --interval=5s --timeout=3s --retries=3 CMD if [ -z "$(echo -e '\xff\xff\xff\xffgetinfo' | nc -w 1 -u ${CHECK_IP} ${CHECK_PORT})" ]; then exit 1; else exit 0; fi
     
 ENTRYPOINT [ "/home/user/cod4/entrypoint.sh" ]
 
