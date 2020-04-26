@@ -20,8 +20,8 @@ RUN apt-get update && \
     apt-get clean && \
     rm -rf /var/lib/apt/lists/*
     
-# check server info every 5 seconds
-HEALTHCHECK --interval=5s --timeout=5s --retries=5 CMD if [ -z "$(echo -e '\xff\xff\xff\xffgetinfo' | nc -w 1 -u ${CHECK_IP} ${CHECK_PORT})" ]; then exit 1; else exit 0; fi
+# check server info every 30 seconds
+HEALTHCHECK --interval=30s --timeout=5s --retries=5 CMD if [ -z "$(echo -e '\xff\xff\xff\xffgetinfo' | nc -w 1 -u ${CHECK_IP} ${CHECK_PORT})" ]; then exit 1; else exit 0; fi
     
 ENTRYPOINT [ "/home/user/cod4/entrypoint.sh" ]
 
