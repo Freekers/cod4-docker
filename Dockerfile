@@ -16,12 +16,12 @@ RUN adduser --system user --home /home/user --uid 1000 && \
     
 RUN apt-get update && \
     apt-get -y upgrade && \
-    apt-get -y install --no-install-recommends gcc-multilib netcat && \ 
+    apt-get -y install --no-install-recommends gcc-multilib ncat && \ 
     apt-get clean && \
     rm -rf /var/lib/apt/lists/*
     
 # check server info every 30 seconds
-HEALTHCHECK --interval=30s --timeout=5s --retries=5 CMD if [ -z "$(echo -e '\xff\xff\xff\xffgetinfo' | timeout 4 nc -u ${CHECK_IP} ${CHECK_PORT})" ]; then exit 1; else exit 0; fi
+HEALTHCHECK --interval=30s --timeout=5s --retries=5 CMD if [ -z "$(echo -e '\xff\xff\xff\xffgetinfo' | ncat -u ${CHECK_IP} ${CHECK_PORT})" ]; then exit 1; else exit 0; fi
     
 ENTRYPOINT [ "/home/user/cod4/entrypoint.sh" ]
 
