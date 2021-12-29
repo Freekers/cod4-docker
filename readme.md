@@ -1,5 +1,7 @@
 # COD4x 1.7a Dedicated Server in Docker
 
+[![Build and Push Docker Image](https://github.com/Freekers/cod4-docker/actions/workflows/automation.yml/badge.svg)](https://github.com/Freekers/cod4-docker/actions/workflows/automation.yml)
+
 *Call of Duty 4 Dedicated Server based on COD4x 1.7a as Docker image*
 
 [![Docker Cod4](https://github.com/freekers/cod4-docker/raw/master/images/title.png)](https://github.com/Freekers/cod4-docker/)
@@ -54,7 +56,7 @@ We assume your *call of duty 4 game* is installed at `/mycod4path`
         -v $(pwd)/usermaps:/home/user/cod4/usermaps:ro \
         -e CHECK_PORT=28960 \
         -e CHECK_IP=127.0.0.1 \
-        freekers/cod4 +map mp_shipment
+        freekers/docker-cod4x17a +map mp_shipment
     ```
 
     The command line argument `+map mp_shipment` is optional and defaults to `+set dedicated 2+set sv_cheats "1"+set sv_maxclients "64"+exec server.cfg+map_rotate`
