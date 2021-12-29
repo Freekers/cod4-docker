@@ -7,7 +7,6 @@ on:
 
 jobs:
   docker:
-    environment: DockerHub
     runs-on: ubuntu-latest
     steps:
       - name: Login to DockerHub
