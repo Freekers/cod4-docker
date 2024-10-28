@@ -24,7 +24,7 @@ RUN adduser --system --home /home/user --uid 1000 user \
     && chmod 500 entrypoint.sh cod4x17a_dedrun
 
 # Healthcheck to verify server status
-HEALTHCHECK --interval=30s --timeout=5s --retries=5 CMD ["/bin/sh", "-c", "if [ -z \"$(echo -e '\xff\xff\xff\xffgetinfo' | socat - udp:${CHECK_IP}:${CHECK_PORT})\" ]; then exit 1; else exit 0; fi"]
+HEALTHCHECK --interval=30s --timeout=5s --retries=5 CMD if [ -z "$(echo -e '\xff\xff\xff\xffgetinfo' | socat - udp:${CHECK_IP}:${CHECK_PORT})" ]; then exit 1; else exit 0; fi
 
 # Set entrypoint to the provided script
 ENTRYPOINT ["/home/user/cod4/entrypoint.sh"]
